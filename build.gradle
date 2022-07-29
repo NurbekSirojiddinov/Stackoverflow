@@ -1,0 +1,52 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    compileOnly("org.springframework.security:spring-security-web")
+    compileOnly("org.springframework.security:spring-security-config")
+    implementation group: 'com.auth0', name: 'java-jwt', version: '3.18.1'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.6.7'
+    compileOnly(group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0')
+    compileOnly(group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0')
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+// https://mvnrepository.com/artifact/org.springframework/spring-core
+//    implementation group: 'org.springframework', name: 'spring-core', version: '2.5.4'
+    compileOnly group: 'org.springframework.ldap', name: 'spring-ldap-core', version: '2.3.2.RELEASE'
+//Thanks for using https://jar-download.com
+    runtimeOnly "com.unboundid:unboundid-ldapsdk:4.0.14"
+    compileOnly("org.springframework.security:spring-security-ldap")
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
