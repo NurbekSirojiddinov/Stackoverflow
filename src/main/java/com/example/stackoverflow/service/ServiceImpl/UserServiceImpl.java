@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserResponse addUser(final AddNewUserRequest request) {
         Assert.notNull(request.getEmail(), "Email cannot be null");
         Assert.notNull(request.getUsername(), "Username cannot be null");
-        // Assert.notNull(request.getRoles(), "Role cannot be null");
+        Assert.notNull(request.getRole(), "Role cannot be null");
 
         final UserEntity entity = new UserEntity();
         entity.setConfirmed(true);
