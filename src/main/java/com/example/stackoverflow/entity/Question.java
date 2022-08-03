@@ -28,7 +28,7 @@ public class Question {
 
     @Column(nullable = false)
     @CreatedBy
-    private Instant createdBy;
+    private String createdBy;
 
     @Column(nullable = false)
     @LastModifiedDate
@@ -36,7 +36,7 @@ public class Question {
 
     @Column(nullable = false)
     @LastModifiedBy
-    private Instant lastModifiedBy;
+    private String lastModifiedBy;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Category category;
@@ -47,6 +47,8 @@ public class Question {
     private String description;
 
     private Long viewCount;
+
+    private Long voteCount;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(inverseJoinColumns = {@JoinColumn(name = "tag_id")})

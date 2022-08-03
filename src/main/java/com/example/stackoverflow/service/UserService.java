@@ -5,5 +5,6 @@ import com.example.stackoverflow.dto.UserResponse;
 
 public interface UserService {
     UserResponse addUser(final AddNewUserRequest request);
+
     UserResponse getUser(final String username);
 }

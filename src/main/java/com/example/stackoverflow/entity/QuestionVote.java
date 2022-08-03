@@ -1,5 +1,6 @@
 package com.example.stackoverflow.entity;
 
+import com.example.stackoverflow.dto.VoteType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -39,4 +40,7 @@ public class QuestionVote {
 
     @ManyToOne
     private Question question;
+
+    @Enumerated(EnumType.STRING)
+    private VoteType type;
 }
