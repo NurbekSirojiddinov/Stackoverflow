@@ -35,6 +35,9 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.6.7'
     compileOnly(group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2')
     compileOnly(group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2')
+    // https://mvnrepository.com/artifact/com.github.vladimir-bukhtoyarov/bucket4j-core
+    implementation group: 'com.github.vladimir-bukhtoyarov', name: 'bucket4j-core', version: '4.10.0'
+
 
 }
 
