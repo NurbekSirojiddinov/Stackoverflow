@@ -2,7 +2,6 @@ package com.example.stackoverflow.rateLimiting;
 
 import io.github.bucket4j.Bucket;
 import io.github.bucket4j.Bucket4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;

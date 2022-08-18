@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter

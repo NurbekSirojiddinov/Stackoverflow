@@ -7,7 +7,7 @@ import java.time.Duration;
 
 public enum PricingPlan {
 
-    FREE(5);
+    FREE(3);
 
     private final int  bucketCapacity;
 
@@ -16,7 +16,7 @@ public enum PricingPlan {
     }
 
     Bandwidth getLimit() {
-        return Bandwidth.classic(bucketCapacity, Refill.intervally(bucketCapacity, Duration.ofHours(24)));
+        return Bandwidth.classic(bucketCapacity, Refill.intervally(bucketCapacity, Duration.ofMinutes(1)));
     }
 
     public int bucketCapacity() {

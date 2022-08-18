@@ -8,14 +8,11 @@ import lombok.Setter;
 @Setter
 public class UserDto {
 
-    private Long id;
-
-    private String name;
+    private String userName;
 
     public static UserDto fromUser(final UserEntity user) {
         final UserDto dto = new UserDto();
-        dto.setId(user.getId());
-        dto.setName(user.getName());
+        dto.setUserName(user.getName());
 
         return dto;
     }
