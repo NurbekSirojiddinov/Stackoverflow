@@ -4,9 +4,9 @@ import com.example.stackoverflow.dto.QuestionVoteDto;
 
 public interface QuestionVoteService {
 
-    QuestionVoteDto upVote(final Long questionId);
+    QuestionVoteDto upVote(final Long questionId, final String username);
 
-    QuestionVoteDto downVote(final Long questionId);
+    QuestionVoteDto downVote(final Long questionId, final String username);
 
-    QuestionVoteDto revertVote(final Long questionId);
+    QuestionVoteDto revertVote(final Long questionId, final String username);
 }

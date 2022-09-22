@@ -27,17 +27,17 @@ public class Question {
     @CreatedDate
     private Instant createdDate;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @CreatedBy
-    private String createdBy;
+    private UserEntity createdBy;
 
     @Column(nullable = false)
     @LastModifiedDate
     private Instant lastModifiedDate;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @LastModifiedBy
-    private String lastModifiedBy;
+    private UserEntity lastModifiedBy;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Category category;

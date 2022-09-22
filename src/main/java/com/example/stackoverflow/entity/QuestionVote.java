@@ -3,6 +3,7 @@ package com.example.stackoverflow.entity;
 import com.example.stackoverflow.dto.VoteType;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -26,17 +27,21 @@ public class QuestionVote {
     @CreatedDate
     private Instant createdDate;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @CreatedBy
-    private Instant createdBy;
+    private UserEntity createdBy;
+
+    @Column(nullable = false)
+    @ColumnDefault("false")
+    private boolean deleted = false;
 
     @Column(nullable = false)
     @LastModifiedDate
     private Instant lastModifiedDate;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @LastModifiedBy
-    private Instant lastModifiedBy;
+    private UserEntity lastModifiedBy;
 
     @ManyToOne
     private Question question;

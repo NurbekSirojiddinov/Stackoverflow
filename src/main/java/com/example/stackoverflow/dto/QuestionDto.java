@@ -49,7 +49,9 @@ public class QuestionDto extends QuestionListItemDto {
             questionDto.setVoteCount(question.getVoteCount());
             questionDto.setViewCount(question.getViewCount());
             questionDto.setCreatedDate(question.getCreatedDate());
-            questionDto.setAuthorUsername(question.getCreatedBy());
+            if (question.getCreatedBy() != null) {
+                questionDto.setAuthor(UserDto.fromUser(question.getCreatedBy()));
+            }
 
             if (this.vote != null) {
                 // TODO: 18/08/22 set votes
