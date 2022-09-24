@@ -35,7 +35,6 @@ public class QuestionVote {
     @ColumnDefault("false")
     private boolean deleted = false;
 
-    @Column(nullable = false)
     @LastModifiedDate
     private Instant lastModifiedDate;
 

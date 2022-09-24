@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("api/v1/question-vote")
+@RequestMapping("/api/v1/question-vote")
 public class QuestionVoteV1Controller {
 
     private final QuestionVoteService questionVoteService;
