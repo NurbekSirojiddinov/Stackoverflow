@@ -37,8 +37,9 @@ dependencies {
     compileOnly(group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2')
     // https://mvnrepository.com/artifact/com.github.vladimir-bukhtoyarov/bucket4j-core
     implementation group: 'com.github.vladimir-bukhtoyarov', name: 'bucket4j-core', version: '4.10.0'
-
-
+    // https://mvnrepository.com/artifact/javax.validation/validation-api
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {

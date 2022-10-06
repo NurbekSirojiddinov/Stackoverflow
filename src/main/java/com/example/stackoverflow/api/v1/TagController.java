@@ -4,6 +4,7 @@ import com.example.stackoverflow.dto.TagDto;
 import com.example.stackoverflow.service.TagService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,12 +28,12 @@ public class TagController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> add(@RequestBody final TagDto form) {
+    public ResponseEntity<?> add(@Validated @RequestBody final TagDto form) {
         return ResponseEntity.ok(tagService.add(form));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody final  TagDto form) {
+    public ResponseEntity<?> update(@Validated @RequestBody final  TagDto form, @PathVariable Long id) {
         return ResponseEntity.ok(tagService.update(id, form));
     }
 

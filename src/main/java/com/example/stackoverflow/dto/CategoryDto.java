@@ -20,7 +20,7 @@ public class CategoryDto {
 
     private String icon;
 
-    public static CategoryDto fromCategory(final Category category) {
+    public static CategoryDto toDto(final Category category) {
         final CategoryDto categoryDto = new CategoryDto();
         categoryDto.setId(category.getId());
         categoryDto.setDescription(category.getDescription());
