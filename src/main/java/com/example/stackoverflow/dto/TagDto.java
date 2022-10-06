@@ -4,12 +4,15 @@ import com.example.stackoverflow.entity.Tag;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Size;
+
 @Getter
 @Setter
 public class TagDto {
 
     private Long id;
 
+    @Size(min = 5, max = 25)
     private String title;
 
     public static TagDto fromTag(final Tag tag) {
