@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("api/v1/question-vote")
+@RequestMapping("/api/v1/question-vote")
 public class QuestionVoteV1Controller {
 
     private final QuestionVoteService questionVoteService;
@@ -32,5 +32,4 @@ public class QuestionVoteV1Controller {
     public ResponseEntity<?> revertVote(@PathVariable Long questionId, final Principal principal) {
         return ResponseEntity.ok(questionVoteService.revertVote( questionId, principal.getName()));
     }
-
 }
