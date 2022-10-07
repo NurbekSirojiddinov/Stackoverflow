@@ -1,5 +1,7 @@
 package com.example.stackoverflow.repository;
 
+import com.example.stackoverflow.dto.VoteType;
+import com.example.stackoverflow.entity.Question;
 import com.example.stackoverflow.entity.QuestionVote;
 import com.example.stackoverflow.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +14,5 @@ public interface QuestionVoteRepository extends JpaRepository<QuestionVote, User
 
     Optional<QuestionVote> findByQuestion_IdAndCreatedByAndDeletedFalse(Long questionId, UserEntity user);
 
+    long countByQuestionAndTypeAndDeletedFalse(Question question, VoteType voteType);
 }

@@ -2,7 +2,6 @@ package com.example.stackoverflow.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.catalina.User;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -50,5 +49,5 @@ public class Answer {
     private Question question;
 
     @Column(nullable = false)
-    private Long viewCount = 0L;
+    private Long voteCount = 0L;
 }

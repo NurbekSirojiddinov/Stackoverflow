@@ -51,9 +51,11 @@ public class Question {
     @ColumnDefault("false")
     private boolean deleted = false;
 
-    private Long viewCount;
+    @Column(nullable = false)
+    private Long viewCount = 0L;
 
-    private Long voteCount;
+    @Column(nullable = false)
+    private Long voteCount = 0L;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(inverseJoinColumns = {@JoinColumn(name = "tag_id")})

@@ -5,10 +5,12 @@ import com.example.stackoverflow.dto.VoteType;
 import com.example.stackoverflow.entity.Question;
 import com.example.stackoverflow.entity.QuestionVote;
 import com.example.stackoverflow.entity.UserEntity;
+import com.example.stackoverflow.repository.QuestionRepository;
 import com.example.stackoverflow.repository.QuestionVoteRepository;
 import com.example.stackoverflow.repository.UserRepository;
 import com.example.stackoverflow.service.QuestionVoteService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import java.util.NoSuchElementException;
@@ -21,23 +23,25 @@ import static com.example.stackoverflow.dto.VoteType.UP;
 public class QuestionVoteServiceImpl implements QuestionVoteService {
 
     private final QuestionVoteRepository questionVoteRepository;
+    private final QuestionRepository questionRepository;
     private final UserRepository userRepository;
     private final EntityManager entityManager;
 
-    public QuestionVoteServiceImpl(QuestionVoteRepository questionVoteRepository, UserRepository userRepository, EntityManager entityManager) {
+    public QuestionVoteServiceImpl(QuestionVoteRepository questionVoteRepository, QuestionRepository questionRepository, UserRepository userRepository, EntityManager entityManager) {
         this.questionVoteRepository = questionVoteRepository;
+        this.questionRepository = questionRepository;
         this.userRepository = userRepository;
         this.entityManager = entityManager;
     }
 
     @Override
     public QuestionVoteDto upVote(Long questionId, String username) {
-        return createVote(questionId, username, UP);
+        return vote(questionId, username, UP);
     }
 
     @Override
     public QuestionVoteDto downVote(Long questionId, String username) {
-       return createVote(questionId, username, DOWN);
+       return vote(questionId, username, DOWN);
     }
 
     @Override
@@ -57,10 +61,11 @@ public class QuestionVoteServiceImpl implements QuestionVoteService {
         throw new NoSuchElementException("Such user is not found!");
     }
 
-    private void reCalculateQuestionVoteCount(final Long questionId) {
-    }
+    private QuestionVoteDto vote(final Long questionId, final String username, final VoteType type) {
+        Assert.notNull(type, "Vote type cannot be null");
+        Assert.notNull(questionId, "questionId cannot be null");
+        Assert.hasText(username, "username cannot be null or blank");
 
-    private QuestionVoteDto createVote(final Long questionId, final String username, final VoteType type) {
         Optional<UserEntity> optionalUser = userRepository.findByUsername(username);
         if (optionalUser.isPresent()) {
             Optional<QuestionVote> optionalQuestionVote = questionVoteRepository
@@ -75,5 +80,13 @@ public class QuestionVoteServiceImpl implements QuestionVoteService {
             throw new IllegalStateException("User already voted for this question!");
         }
         throw new NoSuchElementException("Such user is not found!");
+    }
+
+    private void reCalculateQuestionVoteCount(final Long questionId) {
+        final Question question = questionRepository.getById(questionId);
+        final Long voteCount = questionVoteRepository.countByQuestionAndTypeAndDeletedFalse(question, UP)
+                -questionVoteRepository.countByQuestionAndTypeAndDeletedFalse(question, DOWN);
+        question.setVoteCount(voteCount);
+        questionRepository.save(question);
     }
 }
