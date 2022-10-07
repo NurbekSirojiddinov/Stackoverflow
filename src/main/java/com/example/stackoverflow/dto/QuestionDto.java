@@ -3,7 +3,6 @@ package com.example.stackoverflow.dto;
 import com.example.stackoverflow.entity.Answer;
 import com.example.stackoverflow.entity.Question;
 import com.example.stackoverflow.entity.QuestionVote;
-import com.example.stackoverflow.repository.QuestionRepository;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +15,9 @@ import java.util.stream.Collectors;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class QuestionDto extends QuestionListItemDto {
 
-    private Boolean canVote;
+    private QuestionVoteDto vote;
+
+    private List<AnswerDto> answers;
 
     public static class Builder {
 
@@ -54,11 +55,11 @@ public class QuestionDto extends QuestionListItemDto {
             }
 
             if (this.vote != null) {
-                // TODO: 18/08/22 set votes
+                questionDto.setVote(QuestionVoteDto.fromQuestionVote(this.vote));
             }
 
             if (this.answers != null) {
-                // TODO: 18/08/22 set answers
+                questionDto.setAnswers(this.answers.stream().map(AnswerDto::fromAnswer).collect(Collectors.toList()));
             }
 
             return questionDto;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Getter
@@ -13,8 +14,10 @@ public class QuestionForm {
 
     private Long categoryId;
 
+    @Size(min = 5)
     private String tittle;
 
+    @Size(min = 15)
     private String description;
 
     private Set<TagDto> tags;

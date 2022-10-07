@@ -12,7 +12,7 @@ public interface QuestionService {
 
     QuestionDto findOne(Long id);
 
-    QuestionListItemDto add(QuestionForm questionDto);
+    QuestionListItemDto add(QuestionForm form);
 
     QuestionListItemDto update(Long id, QuestionForm form);
 
