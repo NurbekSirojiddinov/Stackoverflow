@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+
 @SpringBootApplication
 //@EnableJpaRepositories
 @EnableSwagger2
