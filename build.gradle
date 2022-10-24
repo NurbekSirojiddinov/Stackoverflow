@@ -10,7 +10,7 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
-
+sourceCompatibility = '11'
 repositories {
     mavenCentral()
 }
