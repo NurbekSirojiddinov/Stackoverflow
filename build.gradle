@@ -10,6 +10,10 @@ jar {
                 'Main-Class': 'com.example.stackoverflow.StackOverflowApplication'
         )
     }
+
+}
+jar {
+    enabled = false
 }
 
 
