@@ -50,13 +50,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         log.info("WORKING");
         final String access_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 60*1000))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
         final String refresh_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 600 * 600 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 60 *1000))
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
 

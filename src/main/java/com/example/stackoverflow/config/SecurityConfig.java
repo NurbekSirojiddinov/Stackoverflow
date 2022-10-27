@@ -3,6 +3,7 @@ package com.example.stackoverflow.config;
 import com.example.stackoverflow.security.filter.CustomAuthenticationFilter;
 import com.example.stackoverflow.security.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,6 +24,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
@@ -42,8 +44,23 @@ public class SecurityConfig {
         http.authorizeRequests().antMatchers(POST,"/api/login", "/api/token/refresh").permitAll();
         http.authorizeRequests().antMatchers(POST,"/api/category/v1/add").authenticated();
         http.authorizeRequests().antMatchers(GET, "/api/category/v1/**").permitAll();
+
+        http
+                .authorizeRequests()
+               // .anyRequest().authenticated()
+               // .antMatchers(GET,"/ask_question").authenticated()
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .usernameParameter("email")
+                .defaultSuccessUrl("/logged_in")
+                .permitAll()
+                .and().logout()
+                        .logoutSuccessUrl("/").permitAll()
+                ;
         http.addFilter(authenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
 }

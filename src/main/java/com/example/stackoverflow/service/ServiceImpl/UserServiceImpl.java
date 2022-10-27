@@ -1,5 +1,6 @@
 package com.example.stackoverflow.service.ServiceImpl;
 
+import com.example.stackoverflow.entity.Role;
 import com.example.stackoverflow.entity.UserEntity;
 import com.example.stackoverflow.dto.AddNewUserRequest;
 import com.example.stackoverflow.dto.UserResponse;
@@ -33,7 +34,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserResponse addUser(final AddNewUserRequest request) {
         Assert.notNull(request.getEmail(), "Email cannot be null");
         Assert.notNull(request.getUsername(), "Username cannot be null");
-        Assert.notNull(request.getRole(), "Role cannot be null");
 
         final UserEntity entity = new UserEntity();
         entity.setConfirmed(true);
@@ -41,7 +41,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         entity.setDeleted(false);
         entity.setEmail(request.getEmail());
         entity.setName(request.getName());
-        entity.setRole(request.getRole());
+        if (request.getRole() == null) {
+            entity.setRole(Role.USER);
+        } else {
+        entity.setRole(request.getRole());}
         entity.setLastModifiedDate(Instant.now());
         entity.setUsername(request.getUsername());
         entity.setPassword(encoder.encode(request.getPassword()));

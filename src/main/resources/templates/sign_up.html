@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang=""></html>
+<html lang="en">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Registration - StackOverflows</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container text-center">
+<div>
+  <h1>User Registration-Sign Up</h1>
+</div>
+
+    <form th:action="@{/registering_process}" method="post"
+          style="max-width: 600px; margin: 0 auto"
+    th:object="${user}">
+      <div class="m-3">
+        <div class="form-group row">
+          <label class="col-form-label col-4">E-mail</label>
+          <div class="col-8">
+            <input type="email" class="form-control" th:field="*{email}" required/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-4">Password</label>
+          <div class="col-8">
+            <input type="password" class="form-control" th:field="*{password}" required
+            minlength="6" maxlength="10"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-4">Full Name</label>
+          <div class="col-8">
+            <input type="text" class="form-control" th:field="*{name}" required
+            minlength="2" maxlength="25"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label col-4">Username</label>
+          <div class="col-8">
+            <input type="text" class="form-control" th:field="*{username}" required
+            minlength="2" maxlength="30"/>
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+      </div>
+    </form>
+</div
+>
+</body>
+
+</html>

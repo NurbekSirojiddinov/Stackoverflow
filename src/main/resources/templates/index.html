@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/" lang=""></html>
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>StackOverflows </title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container center">
+<div>
+    <h1>Welcome to StackOverflows</h1>
+</div>
+  <div>
+      <h3> <a th:href="@{/ask_question}">Ask a Question</a></h3>
+      <h3> <a th:href="@{/register}">Register</a></h3>
+      <h3> <a th:href="@{/login}">Already have an account?</a></h3>
+  </div>
+</div>
+</body>
+</html>
