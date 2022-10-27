@@ -12,7 +12,7 @@ public class ViewController {
 
     @GetMapping("")
     public String viewHomepage() {
-        return "index";
+        return "index2";
     }
 
     @GetMapping("/register")

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tour Tabbing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta https-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Serif:wght@300;400&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="tour-tabbing-outer">
+  <div class="container">
+    <header><img src="logo.png"></header>
+    <div class="tour-tabbing">
+      <div class="grid-col-3-6-3">
+        <div class="col col-left">
+          <ul class="flex-listing">
+            <li data-tab="tab1" class="active">
+              <a href="#">
+                <img src="ask-a-question.svg"> Ask a question
+              </a>
+            </li>
+            <li data-tab="tab2">
+              <a href="#">
+                <img src="votes.svg"> Vote on everything
+              </a>
+            </li>
+            <li data-tab="tab3">
+              <a href="#">
+                <img src="answer.svg"> Answer questions
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col col-center">
+          <div id="tab1" class="tab-content current">
+            <img src="illo-feats-ask.svg">
+            <h4>Ask a question publicly on 170+ Stack Exchange sites or privately using Stack Overflow for Teams.</h4>
+          </div>
+          <div id="tab2" class="tab-content">
+            <img src="illo-feats-vote.svg">
+            <h4>Upvoting helps exceptional content rise to the top and bring awareness to useful responses.</h4>
+          </div>
+          <div id="tab3" class="tab-content">
+            <img src="illo-feats-answer.svg">
+            <h4>Answer a question to share your knowledge with the world or in private with your team.</h4>
+          </div>
+          <div id="tab4" class="tab-content">
+            <img src="illo-feats-tags.svg">
+            <h4>Tags help make information searchable and find answers that are important to you.</h4>
+          </div>
+          <div id="tab5" class="tab-content">
+            <img src="illo-feats-accept.svg">
+            <h4>Accept the answer which solved your problem to let others benefit from the valuable information.</h4>
+          </div>
+          <div id="tab6" class="tab-content">
+            <img src="illo-feats-recognize.svg">
+            <h4>Our reputation system rewards both the new & experienced based on contribution and activity.</h4>
+          </div>
+        </div>
+        <div class="col col-right">
+          <ul class="flex-listing">
+            <li data-tab="tab4">
+              <a href="#">
+                <img src="tags.svg"> Tag your question
+              </a>
+            </li>
+            <li data-tab="tab5">
+              <a href="#">
+                <img src="accept.svg"> Accept an answer
+              </a>
+            </li>
+            <li data-tab="tab6">
+              <a href="#">
+                <img src="get-recognized.svg"> Get recognized
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $('.flex-listing > li').click(function(){
+    var tab_id = $(this).attr('data-tab');
+    $('.flex-listing > li').removeClass('active');
+    $('.tab-content').removeClass('current');
+    $(this).addClass('active');
+    $("#"+tab_id).addClass('current');
+  });
+</script>
+</body>
+</html>
