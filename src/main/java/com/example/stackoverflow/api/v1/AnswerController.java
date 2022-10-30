@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/answer/v1")
-public class AnswerController {
+public class  AnswerController {
 
     private final AnswerService answerService;
 
