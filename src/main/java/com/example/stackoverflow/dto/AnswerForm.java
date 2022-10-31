@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-public class AnswerForm {
+public class  AnswerForm {
 
     private Long questionId;
 

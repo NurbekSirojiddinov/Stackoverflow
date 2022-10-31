@@ -27,17 +27,15 @@ public class Question {
     @CreatedDate
     private Instant createdDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @CreatedBy
-    private UserEntity createdBy;
+    private String createdBy;
 
     @Column(nullable = false)
     @LastModifiedDate
     private Instant lastModifiedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @LastModifiedBy
-    private UserEntity lastModifiedBy;
+    private String lastModifiedBy;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Category category;
@@ -60,4 +58,10 @@ public class Question {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     private Set<Tag> tags;
+
+    @Transient
+    public Question incrementViewCount() {
+        this.viewCount++;
+        return this;
+    }
 }

@@ -27,17 +27,15 @@ public class Category extends AbstractAuditable_ {
     @CreatedDate
     private Instant createdDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @CreatedBy
-    private UserEntity createdBy;
+    private String createdBy;
 
     @Column(nullable = false)
     @LastModifiedDate
     private Instant lastModifiedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @LastModifiedBy
-    private UserEntity lastModifiedBy;
+    private String lastModifiedBy;
 
     @Column(nullable = false)
     @ColumnDefault("false")

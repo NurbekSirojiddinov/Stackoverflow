@@ -28,6 +28,6 @@ public class QuestionListItemDto {
 
     private Instant createdDate;
 
-    private UserDto author;
+    private String author;
 
 }

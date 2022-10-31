@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED;
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE;
-
-@Controller
+@RestController
+@RequestMapping("/api/user/v1")
 public class UserV1Controller {
    private final UserService userService;
 
@@ -21,10 +21,9 @@ public class UserV1Controller {
         this.userService = userService;
     }
 
-    @PostMapping(path = "/registering_process",
+    @PostMapping(path = "/add",
     consumes = MediaType.ALL_VALUE)
-    public String addUser( final AddNewUserRequest request) {
-         userService.addUser(request);
-         return "register_success";
+    public UserResponse addUser(@RequestBody final AddNewUserRequest request) {
+         return userService.addUser(request);
     }
 }
