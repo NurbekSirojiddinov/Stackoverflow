@@ -27,9 +27,8 @@ public class QuestionVote {
     @CreatedDate
     private Instant createdDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @CreatedBy
-    private UserEntity createdBy;
+    private String createdBy;
 
     @Column(nullable = false)
     @ColumnDefault("false")
@@ -39,9 +38,8 @@ public class QuestionVote {
     @LastModifiedDate
     private Instant lastModifiedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @LastModifiedBy
-    private UserEntity lastModifiedBy;
+    private String lastModifiedBy;
 
     @ManyToOne
     private Question question;

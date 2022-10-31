@@ -41,24 +41,21 @@ public class QuestionVoteServiceImpl implements QuestionVoteService {
 
     @Override
     public QuestionVoteDto downVote(Long questionId, String username) {
-       return vote(questionId, username, DOWN);
+        return vote(questionId, username, DOWN);
     }
 
     @Override
     public QuestionVoteDto revertVote(Long questionId, String username) {
-        var optionalUser = userRepository.findByUsername(username);
-        if (optionalUser.isPresent()) {
-            var optionalQuestionVote = questionVoteRepository
-                    .findByQuestion_IdAndCreatedByAndDeletedFalse(questionId, optionalUser.get());
-            if (optionalQuestionVote.isPresent()) {
-               final QuestionVote vote = optionalQuestionVote.get();
-               vote.setDeleted(true);
-               reCalculateQuestionVoteCount(questionId);
-               return QuestionVoteDto.fromQuestionVote(questionVoteRepository.save(vote));
-            }
-            throw new IllegalStateException("This vote can't be reverted!");
+        var optionalQuestionVote = questionVoteRepository
+                .findByQuestion_IdAndCreatedByAndDeletedFalse(questionId, username);
+        if (optionalQuestionVote.isPresent()) {
+            final QuestionVote vote = optionalQuestionVote.get();
+            vote.setDeleted(true);
+            QuestionVoteDto dto = QuestionVoteDto.fromQuestionVote(questionVoteRepository.save(vote));
+            reCalculateQuestionVoteCount(questionId);
+            return dto;
         }
-        throw new NoSuchElementException("Such user is not found!");
+        throw new IllegalStateException("This vote can't be reverted!");
     }
 
     private QuestionVoteDto vote(final Long questionId, final String username, final VoteType type) {
@@ -66,20 +63,17 @@ public class QuestionVoteServiceImpl implements QuestionVoteService {
         Assert.notNull(questionId, "questionId cannot be null");
         Assert.hasText(username, "username cannot be null or blank");
 
-        Optional<UserEntity> optionalUser = userRepository.findByUsername(username);
-        if (optionalUser.isPresent()) {
-            Optional<QuestionVote> optionalQuestionVote = questionVoteRepository
-                    .findByQuestion_IdAndCreatedByAndDeletedFalse(questionId, optionalUser.get());
-            if (optionalQuestionVote.isEmpty()) {
-                final QuestionVote vote = new QuestionVote();
-                vote.setQuestion(entityManager.getReference(Question.class, questionId));
-                vote.setType(type);
-                reCalculateQuestionVoteCount(questionId);
-                return QuestionVoteDto.fromQuestionVote(questionVoteRepository.save(vote));
-            }
-            throw new IllegalStateException("User already voted for this question!");
+        Optional<QuestionVote> optionalQuestionVote = questionVoteRepository
+                .findByQuestion_IdAndCreatedByAndDeletedFalse(questionId, username);
+        if (optionalQuestionVote.isEmpty()) {
+            final QuestionVote vote = new QuestionVote();
+            vote.setQuestion(entityManager.getReference(Question.class, questionId));
+            vote.setType(type);
+            QuestionVoteDto dto = QuestionVoteDto.fromQuestionVote(questionVoteRepository.save(vote));
+            reCalculateQuestionVoteCount(questionId);
+            return dto;
         }
-        throw new NoSuchElementException("Such user is not found!");
+        throw new IllegalStateException("User already voted for this question!");
     }
 
     private void reCalculateQuestionVoteCount(final Long questionId) {

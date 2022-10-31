@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class QuestionDto extends QuestionListItemDto {
+public class  QuestionDto extends QuestionListItemDto {
 
     private QuestionVoteDto vote;
 
@@ -50,9 +50,7 @@ public class QuestionDto extends QuestionListItemDto {
             questionDto.setVoteCount(question.getVoteCount());
             questionDto.setViewCount(question.getViewCount());
             questionDto.setCreatedDate(question.getCreatedDate());
-            if (question.getCreatedBy() != null) {
-                questionDto.setAuthor(UserDto.fromUser(question.getCreatedBy()));
-            }
+            questionDto.setAuthor(question.getCreatedBy());
 
             if (this.vote != null) {
                 questionDto.setVote(QuestionVoteDto.fromQuestionVote(this.vote));

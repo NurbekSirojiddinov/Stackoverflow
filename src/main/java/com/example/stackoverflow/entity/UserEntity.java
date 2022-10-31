@@ -27,10 +27,6 @@ public class UserEntity {
     @CreatedDate
     private Instant createdDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @CreatedBy
-    private UserEntity createdBy;
-
     @ColumnDefault("false")
     private boolean confirmed = false;
 
@@ -43,11 +39,6 @@ public class UserEntity {
     @Column(nullable = false)
     @LastModifiedDate
     private Instant lastModifiedDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @LastModifiedBy
-    private UserEntity lastModifiedBy;
-
     private String name;
 
     @Column(nullable = false, unique = true)

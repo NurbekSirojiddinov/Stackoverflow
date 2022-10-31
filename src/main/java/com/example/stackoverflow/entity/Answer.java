@@ -23,8 +23,7 @@ public class Answer {
     private Long id;
 
     @CreatedBy
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity createdBy;
+    private String createdBy;
 
     @Column(nullable = false)
     @CreatedDate
@@ -41,9 +40,8 @@ public class Answer {
     @LastModifiedDate
     private Instant lastModifiedDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @LastModifiedBy
-    private UserEntity lastModifiedBy;
+    private String lastModifiedBy;
 
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     private Question question;

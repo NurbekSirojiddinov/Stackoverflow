@@ -21,7 +21,7 @@ public class AnswerDto implements Serializable {
 
     private Instant createdDate;
 
-    private UserDto author;
+    private String author;
 
     public static AnswerDto fromAnswer(final Answer answer) {
         final AnswerDto dto = new AnswerDto();
@@ -29,7 +29,7 @@ public class AnswerDto implements Serializable {
         dto.setContent(answer.getContent());
         dto.setVoteCount(answer.getVoteCount());
         dto.setCreatedDate(answer.getCreatedDate());
-        dto.setAuthor(UserDto.fromUser(answer.getCreatedBy()));
+        dto.setAuthor(answer.getCreatedBy());
         return dto;
     }
 

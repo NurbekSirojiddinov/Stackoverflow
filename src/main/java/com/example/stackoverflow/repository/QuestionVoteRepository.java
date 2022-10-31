@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface QuestionVoteRepository extends JpaRepository<QuestionVote, UserEntity> {
 
-    Optional<QuestionVote> findByQuestion_IdAndCreatedByAndDeletedFalse(Long questionId, UserEntity user);
+    Optional<QuestionVote> findByQuestion_IdAndCreatedByAndDeletedFalse(Long questionId, String username);
 
     long countByQuestionAndTypeAndDeletedFalse(Question question, VoteType voteType);
 }

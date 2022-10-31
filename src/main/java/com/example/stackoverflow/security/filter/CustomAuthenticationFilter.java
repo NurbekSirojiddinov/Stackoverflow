@@ -37,7 +37,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         final String username = request.getParameter("username");
         final String password = request.getParameter("password");
         log.info("Username is: {}", username);
-        log.info("Password id: {}", password);
+        log.info("Password is: {}", password);
 
         final UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
         return authenticationManager.authenticate(authenticationToken);
@@ -50,13 +50,13 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         log.info("WORKING");
         final String access_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 60*1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 60000*1000))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
         final String refresh_token = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 60 *1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 6000 *1000))
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
 
