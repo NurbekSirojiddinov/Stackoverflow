@@ -39,9 +39,16 @@ public class SecurityConfig {
         authenticationFilter.setFilterProcessesUrl("/api/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
-        http.authorizeRequests().antMatchers(POST,"/api/login", "/api/token/refresh").permitAll();
-        http.authorizeRequests().antMatchers(POST,"/api/category/v1/add").authenticated();
-        http.authorizeRequests().antMatchers(GET, "/api/category/v1/**").permitAll();
+
+        http
+                .authorizeRequests()
+                .antMatchers("/**")
+                .authenticated()
+                .antMatchers("/api/question/**")
+                .permitAll()
+                .antMatchers("/api/login", "/api/token/refresh")
+                .permitAll();
+
         http.addFilter(authenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
