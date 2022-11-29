@@ -19,4 +19,6 @@ public interface UserService {
 
     void delete(Long id) throws UserNotFoundException;
 
+    void update(Long id, final AddNewUserRequest request);
+
 }

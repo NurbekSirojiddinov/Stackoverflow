@@ -69,12 +69,20 @@ public class ViewController {
         return "redirect:/users";
     }
 
-    @PostMapping("/register")
-    public String register(AddNewUserRequest request, RedirectAttributes attributes) {
-        userService.addUser(request);
-        attributes.addFlashAttribute("message", "You have successfully registered!!!");
-        return "redirect:/";
+    @PostMapping("/users/update/{id}")
+    public String updateUser(AddNewUserRequest request, RedirectAttributes attributes, @PathVariable Long id) {
+        userService.update(id,request);
+        attributes.addFlashAttribute("message", "The user has been updated successfully!");
+        return "redirect:/users";
     }
+
+
+    @PostMapping("/registers")
+   public String addUser(AddNewUserRequest request, RedirectAttributes attributes) {
+        userService.addUser(request);
+        attributes.addFlashAttribute("message", "You have successfully up!!!");
+        return "redirect:/";
+   }
     @GetMapping("/users/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model, RedirectAttributes attributes) {
         try {

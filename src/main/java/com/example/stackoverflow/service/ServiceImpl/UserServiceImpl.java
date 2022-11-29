@@ -95,6 +95,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public void update(Long id,AddNewUserRequest request) {
+        UserEntity user = userRepository.getById(id);
+        user.setRole(request.getRole());
+        user.setEmail(request.getEmail());
+        user.setName(request.getName());
+        user.setUsername(request.getUsername());
+        userRepository.save(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserEntity> userEntity = userRepository.findByEmail(username);
         if (userEntity.isEmpty()) {

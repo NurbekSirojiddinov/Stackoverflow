@@ -10,7 +10,7 @@
 <div class="container-fluid">
 <div class="text-center"><h2>[[${pageTittle}]]</h2></div>
 
-  <form th:action="@{/users/save}" method="post" th:object="${user}"
+  <form th:action="@{/users/update/{id}}" method="post" th:object="${user} "
   style="max-width: 500px; margin: 0 auto">
     <input type="hidden" th:field="*{id}">
     <div class="border border-secondary rounded p-3">
