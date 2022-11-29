@@ -1,5 +1,6 @@
 package com.example.stackoverflow.service.ServiceImpl;
 
+import com.example.stackoverflow.dto.UserDtoToAdmin;
 import com.example.stackoverflow.entity.Role;
 import com.example.stackoverflow.entity.UserEntity;
 import com.example.stackoverflow.dto.AddNewUserRequest;
@@ -17,6 +18,7 @@ import org.springframework.util.Assert;
 
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -44,7 +46,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (request.getRole() == null) {
             entity.setRole(Role.USER);
         } else {
-        entity.setRole(request.getRole());}
+            entity.setRole(request.getRole());
+        }
         entity.setLastModifiedDate(Instant.now());
         entity.setUsername(request.getUsername());
         entity.setPassword(encoder.encode(request.getPassword()));
@@ -68,8 +71,32 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public List<UserDtoToAdmin> findAllUsers() {
+
+        return userRepository.findAll()
+                .stream().map(UserEntity::toAdmin).collect(Collectors.toList());
+    }
+
+    @Override
+    public UserEntity findById(Long id) throws UserNotFoundException {
+        Optional<UserEntity> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("Could not find any user with ID %d".formatted(id));
+        }
+        return user.get();
+    }
+
+    @Override
+    public void delete(Long id) throws UserNotFoundException {
+        if (!userRepository.existsById(id)) {
+            throw new UserNotFoundException("Such user is not found");
+        }
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> userEntity = userRepository.findByUsername(username);
+        Optional<UserEntity> userEntity = userRepository.findByEmail(username);
         if (userEntity.isEmpty()) {
             log.error("User not found in the database");
             throw new UsernameNotFoundException("User not found in the database");

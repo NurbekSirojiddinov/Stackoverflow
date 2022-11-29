@@ -42,11 +42,17 @@ public class SecurityConfig {
 
         http
                 .authorizeRequests()
-                .antMatchers("/**")
-                .authenticated()
-                .antMatchers("/api/question/**")
+                .antMatchers("/admin/**")
+                .hasRole("MODERATOR")
+                .and()
+                .formLogin()
+                .loginPage("/admin/login")
+                .usernameParameter("email")
+                .loginProcessingUrl("/admin/login")
+                .defaultSuccessUrl("/users")
                 .permitAll()
-                .antMatchers("/api/login", "/api/token/refresh")
+                .and()
+                .logout().logoutUrl("/admin/logout").logoutSuccessUrl("/")
                 .permitAll();
 
         http.addFilter(authenticationFilter);

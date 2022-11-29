@@ -1,5 +1,6 @@
 package com.example.stackoverflow.entity;
 
+import com.example.stackoverflow.dto.UserDtoToAdmin;
 import com.example.stackoverflow.dto.UserResponse;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,5 +59,16 @@ public class UserEntity {
         response.setLastModifiedDate(lastModifiedDate);
 
         return response;
+    }
+
+    public UserDtoToAdmin toAdmin() {
+        UserDtoToAdmin dto = new UserDtoToAdmin();
+        dto.setId(id);
+        dto.setEmail(email);
+        dto.setRole(role);
+        dto.setName(name);
+        dto.setCreatedDate(createdDate);
+        dto.setUsername(username);
+        return dto;
     }
 }
