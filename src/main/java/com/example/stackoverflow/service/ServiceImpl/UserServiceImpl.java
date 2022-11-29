@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserEntity findById(Long id) throws UserNotFoundException {
         Optional<UserEntity> user = userRepository.findById(id);
         if (user.isEmpty()) {
-            throw new UserNotFoundException("Could not find any user with ID %d".formatted(id));
+            throw new UserNotFoundException("Could not find any user with ID " + id);
         }
         return user.get();
     }
